@@ -2,7 +2,7 @@ package slice
 
 import compare_anything "github.com/CC11001100/go-compare-anything"
 
-// ------------------------------------------------ ---------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 type ReduceFunc[T, R any] func(index int, item T, result R) R
 
@@ -14,7 +14,7 @@ func Reduce[T, R any](slice []T, initResult R, reduceFunc ReduceFunc[T, R]) R {
 	return result
 }
 
-// ------------------------------------------------ ---------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 func Max[T any](slice []T, comparator compare_anything.Comparator[T]) T {
 	return Reduce(slice, nil, func(index int, item T, result T) T {

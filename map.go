@@ -1,5 +1,7 @@
 package slice
 
+// ---------------------------------------------------------------------------------------------------------------------
+
 // 对数组中的
 func Map[T, V any](slice []T, mapFunc func(item T) V) []V {
 	newSlice := make([]V, 0)
@@ -9,6 +11,16 @@ func Map[T, V any](slice []T, mapFunc func(item T) V) []V {
 	return newSlice
 }
 
+func FlatMap[T any](slice []T, flatFunc func(index int, item T) []T) []T {
+	newSlice := make([]T, 0)
+	for index, item := range slice {
+		newSlice = append(newSlice, flatFunc(index, item)...)
+	}
+	return newSlice
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
 func AllAdd() {
 
 }
@@ -16,5 +28,3 @@ func AllAdd() {
 func AllSub() {
 
 }
-
-
