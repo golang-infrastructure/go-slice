@@ -20,6 +20,8 @@ func GroupByKeyThenCount[T any, K comparable](slice []T, keyFunc KeyFunc[T, K]) 
 	return countMap
 }
 
+// ---------------------------------------------------------------------------------------------------------------------
+
 type GroupByCountContext[T any, K comparable] struct {
 	Key       K
 	Count     int
@@ -48,3 +50,5 @@ func GroupByKeyThenOrderByCount[T any, K string | int | int8 | int16 | int32 | i
 	//})
 	return itemMetaSlice
 }
+
+// ---------------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,9 @@
 package slice
 
+import (
+	"errors"
+)
+
 // ---------------------------------------------------------------------------------------------------------------------
 
 // Map 对数组中的每个元素应用给定行为
@@ -21,10 +25,32 @@ func FlatMap[T any](slice []T, flatFunc func(index int, item T) []T) []T {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-func AllAdd() {
-
+func AllAdd[T string | int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64](slice []T, n T) {
+	for index, item := range slice {
+		slice[index] = item + n
+	}
 }
 
-func AllSub() {
-
+func AllSub[T int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64](slice []T, n T) {
+	for index, item := range slice {
+		slice[index] = item - n
+	}
 }
+
+func AllMulti[T int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64](slice []T, n T) {
+	for index, item := range slice {
+		slice[index] = item * n
+	}
+}
+
+func AllDivision[T int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64](slice []T, n T) error {
+	if n == 0 {
+		return errors.New("can not division zero")
+	}
+	for index, item := range slice {
+		slice[index] = item / n
+	}
+	return nil
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
