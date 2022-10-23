@@ -30,8 +30,8 @@ func Intersection[T comparable](sliceA []T, sliceB []T) []T {
 	return newSlice
 }
 
-// RemoveAll 切片A减去切片B，sliceA中的元素会保持之前的相对顺序
-func RemoveAll[T comparable](sliceA []T, sliceB []T) []T {
+// Subtract 切片A减去切片B，sliceA中的元素会保持之前的相对顺序
+func Subtract[T comparable](sliceA []T, sliceB []T) []T {
 	sliceBMap := make(map[T]struct{}, 0)
 	for _, item := range sliceB {
 		sliceBMap[item] = struct{}{}
@@ -46,8 +46,8 @@ func RemoveAll[T comparable](sliceA []T, sliceB []T) []T {
 	return newSlice
 }
 
-// Subtract 求非交集部分
-func Subtract[T comparable](sliceA []T, sliceB []T) []T {
+// NotIntersection 求非交集部分
+func NotIntersection[T comparable](sliceA []T, sliceB []T) []T {
 	sliceASet := ToSet(sliceA)
 	sliceBSet := ToSet(sliceB)
 
