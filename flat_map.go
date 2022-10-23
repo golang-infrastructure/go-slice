@@ -1,4 +1,0 @@
-package slice
-
-// FlatMap
-
