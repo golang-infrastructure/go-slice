@@ -1,8 +1,29 @@
 package slice
 
+import (
+	"fmt"
+	"strings"
+)
+
 // To 类似Map，不同的是更推荐这个方法只用来做做类型转换
 func To[From, To any](slice []From, toFunc func(item From) To) []To {
 	return Map[From, To](slice, toFunc)
+}
+
+// ToStringSlice 把切片转为string类型的切片
+func ToStringSlice[T any](slice []T) []string {
+	return To(slice, func(item T) string {
+		return fmt.Sprintf("%#v", item)
+	})
+}
+
+// ToString 把整个切片转为一个字符串，通常用于打印、记录之类的
+func ToString[T any](slice []T) string {
+	sb := strings.Builder{}
+	for _, item := range slice {
+		sb.WriteString(fmt.Sprintf("%#v", item))
+	}
+	return sb.String()
 }
 
 // ToMap 把切片转为map
