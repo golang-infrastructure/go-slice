@@ -1,5 +1,6 @@
 package slice
 
+import "sort"
 
 // GroupByKey 根据key进行分组
 func GroupByKey[T any, K comparable](slice []T, keyFunc KeyFunc[T, K]) map[K][]T {
@@ -21,27 +22,28 @@ func GroupByKeyThenCount[T any, K comparable](slice []T, keyFunc KeyFunc[T, K]) 
 	return countMap
 }
 
-type itemMeta[T any, K comparable] struct {
-	key       K
-	count     int
-	itemSlice []T
+type GroupByCountContext[T any, K comparable] struct {
+	Key       K
+	Count     int
+	ItemSlice []T
 }
 
 // GroupByKeyThenOrderByCount 先分组，再根据每组的count排序
-func GroupByKeyThenOrderByCount[T any, K string | int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64](slice []T, keyFunc KeyFunc[T, K]) {
-	//keySliceMap := GroupByKey(slice, keyFunc)
-	//itemMetaSlice := make([]*itemMeta[T, K], 0)
-	//for key, itemSlice := range keySliceMap {
-	//	itemMetaSlice = append(itemMetaSlice, &itemMeta[T, K]{
-	//		key:       key,
-	//		count:     len(itemSlice),
-	//		itemSlice: itemSlice,
-	//	})
-	//}
-	//SortByKey(itemMetaSlice, func(item string) int {
-	//
-	//})
-	//return countMap
+func GroupByKeyThenOrderByCount[T any, K string | int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64](slice []T, keyFunc KeyFunc[T, K]) []*GroupByCountContext[T, K] {
+	keySliceMap := GroupByKey(slice, keyFunc)
+	itemMetaSlice := make([]*GroupByCountContext[T, K], 0)
+	for key, itemSlice := range keySliceMap {
+		itemMetaSlice = append(itemMetaSlice, &GroupByCountContext[T, K]{
+			Key:       key,
+			Count:     len(itemSlice),
+			ItemSlice: itemSlice,
+		})
+	}
+	// 排序
+	sort.Slice(itemMetaSlice, func(i, j int) bool {
+		a := slice[i]
+		b := slice[j]
+		return keyFunc(-1, a) < keyFunc(-1, b)
+	})
+	return itemMetaSlice
 }
-
-
