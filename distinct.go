@@ -1,18 +1,22 @@
 package slice
 
+// ---------------------------------------------------------------------------------------------------------------------
+
 // Distinct 对切片去重
 func Distinct[T comparable](slice []T) []T {
-	valueSet := make(map[T]struct{})
+	itemSet := make(map[T]struct{})
 	newSlice := make([]T, 0)
 	for _, item := range slice {
-		if _, exists := valueSet[item]; exists {
+		if _, exists := itemSet[item]; exists {
 			continue
 		}
 		newSlice = append(newSlice, item)
-		valueSet[item] = struct{}{}
+		itemSet[item] = struct{}{}
 	}
 	return newSlice
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
 
 // UniqIDFunc 为元素生成一个唯一ID
 type UniqIDFunc[T any] func(item T) string
@@ -31,3 +35,5 @@ func DistinctByUniqIDFunc[T any](slice []T, uniqIDFunc UniqIDFunc[T]) []T {
 	}
 	return newSlice
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
