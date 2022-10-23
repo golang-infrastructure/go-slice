@@ -18,11 +18,11 @@ func SubSlice[T any](slice []T, from, to int) []T {
 }
 
 // Filter 从切片中选择符合条件的元素
-func Filter[T any](slice []T, filterFunc func(value T) bool) []T {
+func Filter[T any](slice []T, filterFunc func(item T) bool) []T {
 	newSlice := make([]T, 0)
-	for _, value := range slice {
-		if filterFunc(value) {
-			newSlice = append(newSlice, value)
+	for _, item := range slice {
+		if filterFunc(item) {
+			newSlice = append(newSlice, item)
 		}
 	}
 	return newSlice
@@ -52,9 +52,9 @@ func ChooseIndexes[T any](slice []T, indexes ...int) []T {
 
 	// filter
 	newSlice := make([]T, 0)
-	for index, value := range slice {
+	for index, item := range slice {
 		if _, exists := indexSet[index]; exists {
-			newSlice = append(newSlice, value)
+			newSlice = append(newSlice, item)
 		}
 	}
 	return newSlice
@@ -63,9 +63,9 @@ func ChooseIndexes[T any](slice []T, indexes ...int) []T {
 // ChooseOddIndexes 选择奇数下标的元素
 func ChooseOddIndexes[T any](slice []T) []T {
 	newSlice := make([]T, 0)
-	for index, value := range slice {
+	for index, item := range slice {
 		if index%2 == 1 {
-			newSlice = append(newSlice, value)
+			newSlice = append(newSlice, item)
 		}
 	}
 	return newSlice
@@ -74,9 +74,9 @@ func ChooseOddIndexes[T any](slice []T) []T {
 // ChooseEvenIndexes 选择偶数下标的元素
 func ChooseEvenIndexes[T any](slice []T) []T {
 	newSlice := make([]T, 0)
-	for index, value := range slice {
+	for index, item := range slice {
 		if index%2 == 0 {
-			newSlice = append(newSlice, value)
+			newSlice = append(newSlice, item)
 		}
 	}
 	return newSlice

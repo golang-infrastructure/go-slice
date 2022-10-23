@@ -6,29 +6,29 @@ import "strings"
 
 // Trim 去除切片两端的nil元素
 func Trim[T any](slice []T) []T {
-	return TrimByFunc(slice, func(value T) bool {
-		return value == nil
+	return TrimByFunc(slice, func(item T) bool {
+		return item == nil
 	})
 }
 
 // TrimLeft 去除切片左边的nil元素
 func TrimLeft[T any](slice []T) []T {
-	return TrimLeftByFunc(slice, func(value T) bool {
-		return value == nil
+	return TrimLeftByFunc(slice, func(item T) bool {
+		return item == nil
 	})
 }
 
 // TrimRight 去除右边的nil元素
 func TrimRight[T any](slice []T) []T {
-	return TrimRightByFunc[T](slice, func(value T) bool {
-		return value == nil
+	return TrimRightByFunc[T](slice, func(item T) bool {
+		return item == nil
 	})
 }
 
 // ------------------------------------------------ ---------------------------------------------------------------------
 
 // TrimFunc 返回true的元素会被trim掉
-type TrimFunc[T any] func(value T) bool
+type TrimFunc[T any] func(item T) bool
 
 // TrimByFunc 从切片两侧trim，元素是否需要trim由自定义的trim函数决定
 func TrimByFunc[T any](slice []T, trimFunc TrimFunc[T]) []T {
@@ -77,98 +77,98 @@ func TrimRightByFunc[T any](slice []T, trimFunc TrimFunc[T]) []T {
 // ------------------------------------------------ ---------------------------------------------------------------------
 
 func TrimByBlankString(slice []string) []string {
-	return TrimByFunc(slice, func(value string) bool {
-		return strings.TrimSpace(value) == ""
+	return TrimByFunc(slice, func(item string) bool {
+		return strings.TrimSpace(item) == ""
 	})
 }
 
 func TrimLeftByBlankString(slice []string) []string {
-	return TrimLeftByFunc(slice, func(value string) bool {
-		return strings.TrimSpace(value) == ""
+	return TrimLeftByFunc(slice, func(item string) bool {
+		return strings.TrimSpace(item) == ""
 	})
 }
 
 func TrimRightByBlankString(slice []string) []string {
-	return TrimRightByFunc(slice, func(value string) bool {
-		return strings.TrimSpace(value) == ""
+	return TrimRightByFunc(slice, func(item string) bool {
+		return strings.TrimSpace(item) == ""
 	})
 }
 
 func TrimByEmptyString(slice []string) []string {
-	return TrimByFunc(slice, func(value string) bool {
-		return value == ""
+	return TrimByFunc(slice, func(item string) bool {
+		return item == ""
 	})
 }
 
 func TrimLeftByEmptyString(slice []string) []string {
-	return TrimLeftByFunc(slice, func(value string) bool {
-		return value == ""
+	return TrimLeftByFunc(slice, func(item string) bool {
+		return item == ""
 	})
 }
 
 func TrimRightByEmptyString(slice []string) []string {
-	return TrimRightByFunc(slice, func(value string) bool {
-		return value == ""
+	return TrimRightByFunc(slice, func(item string) bool {
+		return item == ""
 	})
 }
 
 // ------------------------------------------------ ---------------------------------------------------------------------
 
 func TrimIntByZero[T int | int8 | int16 | int32 | int64](slice []T) []T {
-	return TrimByFunc(slice, func(value T) bool {
-		return value == 0
+	return TrimByFunc(slice, func(item T) bool {
+		return item == 0
 	})
 }
 
 func TrimIntLeftByZero[T int | int8 | int16 | int32 | int64](slice []T) []T {
-	return TrimLeftByFunc(slice, func(value T) bool {
-		return value == 0
+	return TrimLeftByFunc(slice, func(item T) bool {
+		return item == 0
 	})
 }
 
 func TrimIntRightByZero[T int | int8 | int16 | int32 | int64](slice []T) []T {
-	return TrimRightByFunc(slice, func(value T) bool {
-		return value == 0
+	return TrimRightByFunc(slice, func(item T) bool {
+		return item == 0
 	})
 }
 
 // ------------------------------------------------ ---------------------------------------------------------------------
 
 func TrimUIntByZero[T uint | uint8 | uint16 | uint32 | uint64](slice []T) []T {
-	return TrimByFunc(slice, func(value T) bool {
-		return value == 0
+	return TrimByFunc(slice, func(item T) bool {
+		return item == 0
 	})
 }
 
 func TrimUIntLeftByZero[T uint | uint8 | uint16 | uint32 | uint64](slice []T) []T {
-	return TrimLeftByFunc(slice, func(value T) bool {
-		return value == 0
+	return TrimLeftByFunc(slice, func(item T) bool {
+		return item == 0
 	})
 }
 
 func TrimUIntRightByZero[T uint | uint8 | uint16 | uint32 | uint64](slice []T) []T {
-	return TrimRightByFunc(slice, func(value T) bool {
-		return value == 0
+	return TrimRightByFunc(slice, func(item T) bool {
+		return item == 0
 	})
 }
 
 // ------------------------------------------------ ---------------------------------------------------------------------
 
 func TrimFloatByZero[T float32 | float64](slice []T) []T {
-	return TrimByFunc(slice, func(value T) bool {
-		return value < 0.000001
+	return TrimByFunc(slice, func(item T) bool {
+		return item < 0.000001
 	})
 }
 
 func TrimFloatLeftByZero[T float32 | float64](slice []T) []T {
-	return TrimLeftByFunc(slice, func(value T) bool {
-		return value < 0.000001
+	return TrimLeftByFunc(slice, func(item T) bool {
+		return item < 0.000001
 	})
 }
 
 func TrimFloatRightByZero[T float32 | float64](slice []T) []T {
-	return TrimRightByFunc(slice, func(value T) bool {
-		return value < 0.000001
+	return TrimRightByFunc(slice, func(item T) bool {
+		return item < 0.000001
 	})
 }
 
