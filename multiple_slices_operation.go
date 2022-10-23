@@ -2,9 +2,6 @@ package slice
 
 // 这个文件中是多个切片之间的操作
 
-func ReduceByKey[T any, K comparable](slice []T, reduceFunc ReduceFunc[T, K]) map[K]T {
-	return nil
-}
 
 // aggregateByKey
 
