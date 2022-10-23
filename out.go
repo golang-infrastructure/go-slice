@@ -1,8 +1,19 @@
 package slice
 
+import (
+	"os"
+	"strings"
+)
+
 // SaveAsTextFile 保存到文本文件
 func SaveAsTextFile[T any](slice []T, filepath string) error {
-	return nil
+	stringSlice := ToStringSlice(slice)
+	open, err := os.Open(filepath)
+	if err != nil {
+		return err
+	}
+	_, err = open.WriteString(strings.Join(stringSlice, "\n"))
+	return err
 }
 
 // SaveAsCSVFile 保存到CSV文件
