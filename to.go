@@ -16,7 +16,16 @@ func ToMap[T, K comparable, V any](slice []T, toMapFunc func(index int, item T) 
 }
 
 // ToSet 把切片转为set
-func ToSet[T any, S comparable](slice []T, toSetFunc func(index int, item T) S) map[S]struct{} {
+func ToSet[T comparable](slice []T) map[T]struct{} {
+	set := make(map[T]struct{}, 0)
+	for _, item := range slice {
+		set[item] = struct{}{}
+	}
+	return set
+}
+
+// ToSetWithFunc 把切片转为set
+func ToSetWithFunc[T any, S comparable](slice []T, toSetFunc func(index int, item T) S) map[S]struct{} {
 	set := make(map[S]struct{}, 0)
 	for index, item := range slice {
 		set[toSetFunc(index, item)] = struct{}{}
