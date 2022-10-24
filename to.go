@@ -6,13 +6,13 @@ import (
 )
 
 // To 类似Map，不同的是更推荐这个方法只用来做做类型转换
-func To[From, To any](slice []From, toFunc func(item From) To) []To {
+func To[From, To any](slice []From, toFunc func(index int, item From) To) []To {
 	return Map[From, To](slice, toFunc)
 }
 
 // ToStringSlice 把切片转为string类型的切片
 func ToStringSlice[T any](slice []T) []string {
-	return To(slice, func(item T) string {
+	return To(slice, func(index int, item T) string {
 		return fmt.Sprintf("%#v", item)
 	})
 }

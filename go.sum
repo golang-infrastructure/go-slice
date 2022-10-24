@@ -1,2 +1,4 @@
 github.com/CC11001100/go-compare-anything v0.0.0-20221023140235-4a9005fb29c1 h1:KTf3wE7+pUWfixxoaYr31X2cw5ojcbZX/w1vOVDxVno=
 github.com/CC11001100/go-compare-anything v0.0.0-20221023140235-4a9005fb29c1/go.mod h1:G5t1oskrtz/RGZ1nCMh+jMvbTIPzYlMXYBDtwRqaIpI=
+github.com/CC11001100/go-heap v0.0.1 h1:Jv2L3+X53LjK+Cl5/wQUbvVcwM0gLOuCxRivq84vYaQ=
+github.com/CC11001100/go-heap v0.0.1/go.mod h1:t0XDJArw2Zk+0yQRQAblMI+mHiyi31to2v+7GWZt5qM=

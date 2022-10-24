@@ -1,6 +1,5 @@
 package slice
 
-type KeyFunc[T any, K comparable] func(index int, item T) K
 
 // Join 两个切片join，两个都有的才会被join返回
 func Join[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]) map[K][]T {

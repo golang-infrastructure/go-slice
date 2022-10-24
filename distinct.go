@@ -18,12 +18,9 @@ func Distinct[T comparable](slice []T) []T {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-// UniqIDFunc 为元素生成一个唯一ID
-type UniqIDFunc[T any] func(item T) string
-
 // DistinctByUniqIDFunc 根据自定义的ID去重
-func DistinctByUniqIDFunc[T any](slice []T, uniqIDFunc UniqIDFunc[T]) []T {
-	uniqIDSet := make(map[string]struct{}, 0)
+func DistinctByUniqIDFunc[T any, K comparable](slice []T, uniqIDFunc UniqIDFunc[T, K]) []T {
+	uniqIDSet := make(map[K]struct{}, 0)
 	newSlice := make([]T, 0)
 	for _, item := range slice {
 		id := uniqIDFunc(item)

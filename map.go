@@ -7,10 +7,10 @@ import (
 // ---------------------------------------------------------------------------------------------------------------------
 
 // Map 对数组中的每个元素应用给定行为
-func Map[T, V any](slice []T, mapFunc func(item T) V) []V {
+func Map[T, V any](slice []T, mapFunc func(index int, item T) V) []V {
 	newSlice := make([]V, 0)
-	for _, item := range slice {
-		newSlice = append(newSlice, mapFunc(item))
+	for index, item := range slice {
+		newSlice = append(newSlice, mapFunc(index, item))
 	}
 	return newSlice
 }
