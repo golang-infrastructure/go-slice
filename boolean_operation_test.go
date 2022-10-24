@@ -35,3 +35,10 @@ func TestSubtract(t *testing.T) {
 	s3 := Subtract(s1, s2)
 	t.Log(s3)
 }
+
+func TestNotIntersection(t *testing.T) {
+	s1 := []string{"a", "b"}
+	s2 := []string{"b"}
+	s3 := NotIntersection(s1, s2)
+	t.Log(s3)
+}
