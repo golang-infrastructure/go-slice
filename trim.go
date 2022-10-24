@@ -68,7 +68,7 @@ func TrimRightByFunc[T any](slice []T, trimFunc TrimFunc[T]) []T {
 		right--
 	}
 	if right >= 0 {
-		return slice[right:]
+		return slice[:right]
 	} else {
 		return nil
 	}
