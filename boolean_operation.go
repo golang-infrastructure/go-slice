@@ -29,16 +29,13 @@ func Intersection[T comparable](sliceA []T, sliceB []T) []T {
 
 // Subtract 切片A减去切片B，sliceA中的元素会保持之前的相对顺序
 func Subtract[T comparable](sliceA []T, sliceB []T) []T {
-	sliceBMap := make(map[T]struct{}, 0)
-	for _, item := range sliceB {
-		sliceBMap[item] = struct{}{}
-	}
+	sliceBSet := ToSet(sliceB)
 	newSlice := make([]T, 0)
-	for _, item := range sliceA {
-		if _, exists := sliceBMap[item]; exists {
+	for _, itemA := range sliceA {
+		if _, exists := sliceBSet[itemA]; exists {
 			continue
 		}
-		newSlice = append(newSlice, item)
+		newSlice = append(newSlice, itemA)
 	}
 	return newSlice
 }
