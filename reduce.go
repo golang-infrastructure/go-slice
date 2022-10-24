@@ -31,7 +31,8 @@ func ReduceByKey[T any, K comparable, R any](slice []T, keyFunc KeyFunc[T, K], r
 // Max 求出切片中的最大值
 func Max[T any](slice []T, comparator compare_anything.Comparator[T]) T {
 	if len(slice) == 0 {
-		return nil
+		var zero T
+		return zero
 	}
 	return Reduce(slice[1:], slice[0], func(index int, item T, result T) T {
 		if comparator(item, result) > 0 {
@@ -45,7 +46,8 @@ func Max[T any](slice []T, comparator compare_anything.Comparator[T]) T {
 // Min 求出切片中的最小值
 func Min[T any](slice []T, comparator compare_anything.Comparator[T]) T {
 	if len(slice) == 0 {
-		return nil
+		var zero T
+		return zero
 	}
 	return Reduce(slice[1:], slice[0], func(index int, item T, result T) T {
 		if comparator(item, result) < 0 {

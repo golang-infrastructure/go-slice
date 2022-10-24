@@ -2,7 +2,6 @@ package slice
 
 // 这个文件中是多个切片之间的操作
 
-
 // aggregateByKey
 
 // Cartesian 笛卡尔积，把两个切片相乘
@@ -39,4 +38,9 @@ func Zip[K comparable, V any](keySlice []K, valueSlice []V) map[K]V {
 		resultMap[keyItem] = valueSlice[index]
 	}
 	return resultMap
+}
+
+// MergeOrderedSlices 合并两个有序数组
+func MergeOrderedSlices[T any](sliceA []T, sliceB []T) {
+	// TODO
 }

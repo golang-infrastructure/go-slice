@@ -31,7 +31,8 @@ func Filter[T any](slice []T, filterFunc func(item T) bool) []T {
 // ------------------------------------------------ By Index ---------------------------------------------------------------------
 
 func ChooseIndex[T any](slice []T, index int) T {
-	return ChooseIndexOrDefault(slice, index, nil)
+	var zero T
+	return ChooseIndexOrDefault(slice, index, zero)
 }
 
 func ChooseIndexOrDefault[T any](slice []T, index int, defaultValue T) T {
@@ -87,7 +88,8 @@ func ChooseEvenIndexes[T any](slice []T) []T {
 // ChooseRandomIndex 从切片中随机选择一个元素
 func ChooseRandomIndex[T any](slice []T) T {
 	if len(slice) == 0 {
-		return nil
+		var zero T
+		return zero
 	}
 	return slice[rand.Int()%len(slice)]
 }
@@ -119,13 +121,15 @@ func ChooseMiddleIndex[T any](slice []T) (T, T) {
 		return slice[len(slice)/2], slice[len(slice)/2-1]
 	} else {
 		// 奇数
-		return slice[len(slice)/2], nil
+		var zero T
+		return slice[len(slice)/2], zero
 	}
 }
 
 // FirstItem 选择数组中的第一个元素
 func FirstItem[T any](slice []T) T {
-	return FirstItemOrDefault(slice, nil)
+	var zero T
+	return FirstItemOrDefault(slice, zero)
 }
 
 // FirstItemOrDefault 选择数组中的第一个元素，如果数组为空的话则返回默认值
@@ -148,7 +152,8 @@ func FirstItems[T any](slice []T, n int) []T {
 
 // LastItem 返回切片的最后一个元素，如果有的话
 func LastItem[T any](slice []T) T {
-	return LastItemOrDefault(slice, nil)
+	var zero T
+	return LastItemOrDefault(slice, zero)
 }
 
 // LastItemOrDefault 返回切片的最后一个元素，如果切片为空返回给定的默认值

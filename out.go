@@ -1,6 +1,7 @@
 package slice
 
 import (
+	"encoding/json"
 	"os"
 	"strings"
 )
@@ -16,12 +17,37 @@ func SaveAsTextFile[T any](slice []T, filepath string) error {
 	return err
 }
 
-// SaveAsCSVFile 保存到CSV文件
-func SaveAsCSVFile[T any](slice []T, filepath string) error {
-	return nil
+func AppendCSVFile() {
+
 }
 
-// SaveAsJsonFile 保存到JSON文件
+//// SaveAsCSVFile 把矩阵保存为CSV文件
+//func SaveAsCSVFile[T any](slice []T, filepath string) error {
+//
+//	for {
+//
+//	}
+//
+//	file, err := os.Open(filepath)
+//	if err != nil {
+//		return err
+//	}
+//	defer file.Close()
+//	writer := csv.NewWriter(file)
+//	writer.Write()
+//	return nil
+//}
+
+// SaveAsJsonFile 把切片保存到JSON文件
 func SaveAsJsonFile[T any](slice []T, filepath string) error {
-	return nil
+	marshal, err := json.Marshal(slice)
+	if err != nil {
+		return err
+	}
+	open, err := os.Open(filepath)
+	if err != nil {
+		return err
+	}
+	_, err = open.Write(marshal)
+	return err
 }

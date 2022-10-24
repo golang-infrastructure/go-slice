@@ -1,0 +1,23 @@
+package slice
+
+import (
+	"testing"
+)
+
+func TestUnion(t *testing.T) {
+
+	// empty
+	s1 := []string{}
+	s2 := []string{"a", "b"}
+	s3 := Union(s1, s2)
+	t.Log(s3)
+
+	type foo struct {
+		bar string
+	}
+	f1 := []*foo{&foo{bar: "001"}}
+	f2 := []*foo{&foo{bar: "002"}}
+	f3 := Union(f1, f2)
+	t.Log(f3)
+
+}

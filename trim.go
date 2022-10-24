@@ -5,23 +5,26 @@ import "strings"
 // ---------------------------------------------------------------------------------------------------------------------
 
 // Trim 去除切片两端的nil元素
-func Trim[T any](slice []T) []T {
+func Trim[T comparable](slice []T) []T {
 	return TrimByFunc(slice, func(item T) bool {
-		return item == nil
+		var zero T
+		return item == zero
 	})
 }
 
 // TrimLeft 去除切片左边的nil元素
-func TrimLeft[T any](slice []T) []T {
+func TrimLeft[T comparable](slice []T) []T {
 	return TrimLeftByFunc(slice, func(item T) bool {
-		return item == nil
+		var zero T
+		return item == zero
 	})
 }
 
 // TrimRight 去除右边的nil元素
-func TrimRight[T any](slice []T) []T {
+func TrimRight[T comparable](slice []T) []T {
 	return TrimRightByFunc[T](slice, func(item T) bool {
-		return item == nil
+		var zero T
+		return item == zero
 	})
 }
 
@@ -154,18 +157,21 @@ func TrimUIntRightByZero[T uint | uint8 | uint16 | uint32 | uint64](slice []T) [
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+// TrimFloatByZero 把浮点型切片的两侧的零值去除
 func TrimFloatByZero[T float32 | float64](slice []T) []T {
 	return TrimByFunc(slice, func(item T) bool {
 		return item < 0.000001
 	})
 }
 
+// TrimFloatLeftByZero 把浮点型切片的左侧的零值去除
 func TrimFloatLeftByZero[T float32 | float64](slice []T) []T {
 	return TrimLeftByFunc(slice, func(item T) bool {
 		return item < 0.000001
 	})
 }
 
+// TrimFloatRightByZero 把浮点型切片的右侧的零值去除
 func TrimFloatRightByZero[T float32 | float64](slice []T) []T {
 	return TrimRightByFunc(slice, func(item T) bool {
 		return item < 0.000001

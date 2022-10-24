@@ -2,11 +2,11 @@ package slice
 
 // Union 并集，把两个切片合并，会保持两个切片中元素的相对顺序
 func Union[T any](sliceA []T, sliceB []T) []T {
-	newSlice := make([]T, 0, len(sliceA)+len(sliceB))
+	newSlice := make([]T, len(sliceA)+len(sliceB), len(sliceA)+len(sliceB))
 	for i := 0; i < len(sliceA); i++ {
 		newSlice[i] = sliceA[i]
 	}
-	newSliceIndex := len(newSlice)
+	newSliceIndex := len(sliceA)
 	for i := 0; i < len(sliceB); i++ {
 		newSlice[newSliceIndex] = sliceB[i]
 		newSliceIndex++
