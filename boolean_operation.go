@@ -16,16 +16,13 @@ func Union[T any](sliceA []T, sliceB []T) []T {
 
 // Intersection 求两个切片的交集
 func Intersection[T comparable](sliceA []T, sliceB []T) []T {
-	sliceBMap := make(map[T]struct{}, 0)
-	for _, item := range sliceB {
-		sliceBMap[item] = struct{}{}
-	}
+	sliceBSet := ToSet(sliceB)
 	newSlice := make([]T, 0)
-	for _, item := range sliceA {
-		if _, exists := sliceBMap[item]; !exists {
+	for _, itemA := range sliceA {
+		if _, exists := sliceBSet[itemA]; !exists {
 			continue
 		}
-		newSlice = append(newSlice, item)
+		newSlice = append(newSlice, itemA)
 	}
 	return newSlice
 }

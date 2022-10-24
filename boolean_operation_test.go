@@ -21,3 +21,10 @@ func TestUnion(t *testing.T) {
 	t.Log(f3)
 
 }
+
+func TestIntersection(t *testing.T) {
+	s1 := []string{"b"}
+	s2 := []string{"a", "b"}
+	s3 := Intersection(s1, s2)
+	t.Log(s3)
+}
