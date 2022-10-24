@@ -5,10 +5,14 @@ import (
 	"strings"
 )
 
+// ---------------------------------------------------------------------------------------------------------------------
+
 // To 类似Map，不同的是更推荐这个方法只用来做做类型转换
 func To[From, To any](slice []From, toFunc func(index int, item From) To) []To {
 	return Map[From, To](slice, toFunc)
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
 
 // ToStringSlice 把切片转为string类型的切片
 func ToStringSlice[T any](slice []T) []string {
@@ -26,6 +30,8 @@ func ToString[T any](slice []T) string {
 	return sb.String()
 }
 
+// ---------------------------------------------------------------------------------------------------------------------
+
 // ToMap 把切片转为map
 func ToMap[T, K comparable, V any](slice []T, toMapFunc func(index int, item T) (K, V)) map[K]V {
 	resultMap := make(map[K]V, 0)
@@ -35,6 +41,8 @@ func ToMap[T, K comparable, V any](slice []T, toMapFunc func(index int, item T) 
 	}
 	return resultMap
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
 
 // ToSet 把切片转为set
 func ToSet[T comparable](slice []T) map[T]struct{} {
@@ -54,6 +62,8 @@ func ToSetWithFunc[T any, S comparable](slice []T, toSetFunc func(index int, ite
 	return set
 }
 
+// ---------------------------------------------------------------------------------------------------------------------
+
 // Flat2 二维切片打平为一维切片
 func Flat2[T any](slice [][]T) []T {
 	resultSlice := make([]T, 0)
@@ -65,10 +75,29 @@ func Flat2[T any](slice [][]T) []T {
 	return resultSlice
 }
 
-// 多维数组转为一维数组
+// ---------------------------------------------------------------------------------------------------------------------
 
-// 一维数组转为多维数组
+// ToMatrix 一维切片转换为矩阵
+func ToMatrix[T any](slice []T, columnCount int) [][]T {
+	matrix := make([][]T, 0)
+	consumer := NewSliceConsumer(slice)
+	for !consumer.IsDone() {
+		row := make([]T, columnCount, columnCount)
+		matrix = append(matrix, row)
+		for index := range row {
+			e, err := consumer.TakeE()
+			if err != nil {
+				return matrix
+			}
+			row[index] = e
+		}
+	}
+	return matrix
+}
 
-// 一维数组切割为矩阵
+// FromMatrix 矩阵转为一维切片
+func FromMatrix[T any](matrix [][]T) []T {
+	return Flat2(matrix)
+}
 
-// 矩阵转为一维数组
+// ------------------------------------------------ ---------------------------------------------------------------------
