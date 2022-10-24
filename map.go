@@ -25,25 +25,25 @@ func FlatMap[T any](slice []T, flatFunc func(index int, item T) []T) []T {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-func AllAdd[T string | int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64](slice []T, n T) {
+func AllAdd[T Ordered](slice []T, n T) {
 	for index, item := range slice {
 		slice[index] = item + n
 	}
 }
 
-func AllSub[T int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64](slice []T, n T) {
+func AllSub[T Integer | Float](slice []T, n T) {
 	for index, item := range slice {
 		slice[index] = item - n
 	}
 }
 
-func AllMulti[T int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64](slice []T, n T) {
+func AllMulti[T Integer | Float](slice []T, n T) {
 	for index, item := range slice {
 		slice[index] = item * n
 	}
 }
 
-func AllDivision[T int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64](slice []T, n T) error {
+func AllDivision[T Integer | Float](slice []T, n T) error {
 	if n == 0 {
 		return errors.New("can not division zero")
 	}
