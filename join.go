@@ -1,8 +1,7 @@
 package slice
 
-
-// Join 两个切片join，两个都有的才会被join返回
-func Join[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]) map[K][]T {
+// JoinSlice 两个切片join，两个都有的才会被join返回
+func JoinSlice[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]) map[K][]T {
 	sliceAMap := make(map[K]T, 0)
 	for indexA, itemA := range sliceA {
 		keyA := keyFunc(indexA, itemA)
@@ -23,8 +22,8 @@ func Join[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]) ma
 	return joinResultMap
 }
 
-// LeftJoin 左边全来
-func LeftJoin[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]) map[K][]T {
+// LeftJoinSlice 左边全来
+func LeftJoinSlice[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]) map[K][]T {
 	sliceAMap := make(map[K]T, 0)
 	for indexA, itemA := range sliceA {
 		keyA := keyFunc(indexA, itemA)
@@ -56,13 +55,13 @@ func LeftJoin[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]
 	return joinResultMap
 }
 
-// RightJoin 右边全来
-func RightJoin[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]) map[K][]T {
-	return LeftJoin(sliceB, sliceA, keyFunc)
+// RightJoinSlice 右边全来
+func RightJoinSlice[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]) map[K][]T {
+	return LeftJoinSlice(sliceB, sliceA, keyFunc)
 }
 
-// FullJoin 两边全来
-func FullJoin[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]) map[K][]T {
+// FullJoinSlice 两边全来
+func FullJoinSlice[T any, K comparable](sliceA []T, sliceB []T, keyFunc KeyFunc[T, K]) map[K][]T {
 	joinResultMap := make(map[K][]T, 0)
 	for indexA, itemA := range sliceA {
 		keyA := keyFunc(indexA, itemA)
