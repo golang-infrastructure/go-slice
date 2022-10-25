@@ -4,19 +4,21 @@ import "sort"
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-// GroupByKey 根据key进行分组
-func GroupByKey[T any, K comparable](slice []T, keyFunc KeyFunc[T, K]) map[K][]T {
+// GroupByKey 根据key进行分组，支持传入多个切片同时分组
+func GroupByKey[T any, K comparable](keyFunc KeyFunc[T, K], slices ...[]T) map[K][]T {
 	keySliceMap := make(map[K][]T, 0)
-	for index, item := range slice {
-		key := keyFunc(index, item)
-		keySliceMap[key] = append(keySliceMap[key], item)
+	for _, slice := range slices {
+		for index, item := range slice {
+			key := keyFunc(index, item)
+			keySliceMap[key] = append(keySliceMap[key], item)
+		}
 	}
 	return keySliceMap
 }
 
 // GroupByKeyThenCount 先分组，再求每一组的count
-func GroupByKeyThenCount[T any, K comparable](slice []T, keyFunc KeyFunc[T, K]) map[K]int {
-	keySliceMap := GroupByKey(slice, keyFunc)
+func GroupByKeyThenCount[T any, K comparable](keyFunc KeyFunc[T, K], slices ...[]T) map[K]int {
+	keySliceMap := GroupByKey(keyFunc, slices...)
 	countMap := make(map[K]int, 0)
 	for key, keySlice := range keySliceMap {
 		countMap[key] = len(keySlice)
@@ -33,8 +35,8 @@ type GroupByCountContext[T any, K comparable] struct {
 }
 
 // GroupByKeyThenOrderByCount 先分组，再根据每组的count排序
-func GroupByKeyThenOrderByCount[T any, K string | int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64](slice []T, keyFunc KeyFunc[T, K]) []*GroupByCountContext[T, K] {
-	keySliceMap := GroupByKey(slice, keyFunc)
+func GroupByKeyThenOrderByCount[T any, K Ordered](keyFunc KeyFunc[T, K], slices ...[]T) []*GroupByCountContext[T, K] {
+	keySliceMap := GroupByKey(keyFunc, slices...)
 	itemMetaSlice := make([]*GroupByCountContext[T, K], 0)
 	for key, itemSlice := range keySliceMap {
 		itemMetaSlice = append(itemMetaSlice, &GroupByCountContext[T, K]{

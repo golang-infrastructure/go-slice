@@ -15,9 +15,9 @@ func TestGroupByKey(t *testing.T) {
 	slice = append(slice, &user{age: 20, name: "刘备"})
 	slice = append(slice, &user{age: 250, name: "曹操"})
 
-	r := GroupByKey(slice, func(index int, item *user) int {
+	r := GroupByKey(func(index int, item *user) int {
 		return item.age
-	})
+	}, slice)
 	t.Logf("%#v", r)
 
 }
@@ -33,9 +33,9 @@ func TestGroupByKeyThenCount(t *testing.T) {
 	slice = append(slice, &user{age: 20, name: "刘备"})
 	slice = append(slice, &user{age: 250, name: "曹操"})
 
-	r := GroupByKeyThenCount(slice, func(index int, item *user) int {
+	r := GroupByKeyThenCount(func(index int, item *user) int {
 		return item.age
-	})
+	}, slice)
 	t.Logf("%#v", r)
 }
 
@@ -50,8 +50,8 @@ func TestGroupByKeyThenOrderByCount(t *testing.T) {
 	slice = append(slice, &user{age: 20, name: "刘备"})
 	slice = append(slice, &user{age: 250, name: "曹操"})
 
-	r := GroupByKeyThenOrderByCount(slice, func(index int, item *user) int {
+	r := GroupByKeyThenOrderByCount(func(index int, item *user) int {
 		return item.age
-	})
+	}, slice)
 	t.Logf("%#v", r)
 }
