@@ -58,10 +58,10 @@ func TestFromMapValue(t *testing.T) {
 
 func TestFromSet(t *testing.T) {
 	a := map[string]struct{}{
-		"a": struct{}{},
-		"b": struct{}{},
-		"c": struct{}{},
-		"d": struct{}{},
+		"a": {},
+		"b": {},
+		"c": {},
+		"d": {},
 	}
 	slice := FromSet(a)
 	t.Log(slice)
@@ -69,10 +69,10 @@ func TestFromSet(t *testing.T) {
 
 func TestFromSetByFunc(t *testing.T) {
 	a := map[string]struct{}{
-		"a": struct{}{},
-		"b": struct{}{},
-		"c": struct{}{},
-		"d": struct{}{},
+		"a": {},
+		"b": {},
+		"c": {},
+		"d": {},
 	}
 	slice := FromSetByFunc(a, func(key string) string {
 		return key + "aaaa"
@@ -82,10 +82,10 @@ func TestFromSetByFunc(t *testing.T) {
 
 func TestFromSetFlatByFunc(t *testing.T) {
 	a := map[string]struct{}{
-		"a": struct{}{},
-		"b": struct{}{},
-		"c": struct{}{},
-		"d": struct{}{},
+		"a": {},
+		"b": {},
+		"c": {},
+		"d": {},
 	}
 	slice := FromSetFlatByFunc(a, func(key string) []string {
 		return []string{key, key + "aaaa"}
