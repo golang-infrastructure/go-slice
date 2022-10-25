@@ -54,6 +54,15 @@ func FromMapValue[K comparable, V any](fromMap map[K]V) []V {
 	return slice
 }
 
+// FromMapValueFlat FromMapValue 把map的value转为切片，当value是一个切片的时候使用
+func FromMapValueFlat[K comparable, V any](fromMap map[K][]V) []V {
+	slice := make([]V, 0)
+	for _, value := range fromMap {
+		slice = append(slice, value...)
+	}
+	return slice
+}
+
 // ---------------------------------------------------------------------------------------------------------------------
 
 // FromSet 把se转换为切片

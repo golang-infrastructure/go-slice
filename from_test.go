@@ -92,3 +92,13 @@ func TestFromSetFlatByFunc(t *testing.T) {
 	})
 	t.Log(slice)
 }
+
+func TestFromMapValueFlat(t *testing.T) {
+	m := map[string][]int{
+		"a": []int{1, 2, 3},
+		"b": []int{11, 22, 33},
+		"c": []int{91, 72, 63},
+	}
+	flat := FromMapValueFlat(m)
+	t.Log(flat)
+}
