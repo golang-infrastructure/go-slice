@@ -2,6 +2,8 @@ package slice
 
 import "sort"
 
+// ---------------------------------------------------------------------------------------------------------------------
+
 // GroupByKey 根据key进行分组
 func GroupByKey[T any, K comparable](slice []T, keyFunc KeyFunc[T, K]) map[K][]T {
 	keySliceMap := make(map[K][]T, 0)
@@ -43,9 +45,7 @@ func GroupByKeyThenOrderByCount[T any, K string | int | int8 | int16 | int32 | i
 	}
 	// 排序
 	sort.Slice(itemMetaSlice, func(i, j int) bool {
-		a := slice[i]
-		b := slice[j]
-		return keyFunc(-1, a) < keyFunc(-1, b)
+		return itemMetaSlice[i].Key < itemMetaSlice[j].Key
 	})
 	return itemMetaSlice
 }
