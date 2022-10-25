@@ -5,7 +5,7 @@ import (
 )
 
 func TestFromItems(t *testing.T) {
-	t.Log(FromItems(1, 2, 3))
+	t.Log(Of(1, 2, 3))
 }
 
 func TestFromMapByFunc(t *testing.T) {
