@@ -6,6 +6,7 @@ var (
 	ErrSliceEmpty = errors.New("slice empty")
 )
 
+// SliceConsumer 用于方便的从slice中按顺序消费数据，即把切片当做一个简单的队列
 type SliceConsumer[T any] struct {
 	slice []T
 	index int
