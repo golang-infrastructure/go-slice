@@ -1,11 +1,20 @@
 package slice
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestTrim(t *testing.T) {
 	slice := []int{0}
 	slice = Trim(slice)
 	t.Log(slice)
+}
+
+func ExampleTrim() {
+	fmt.Println("OK")
+	// Output:
+	// OK
 }
 
 func TestTrimRight(t *testing.T) {
