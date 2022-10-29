@@ -39,15 +39,15 @@ func TestChooseOddIndexes(t *testing.T) {
 
 func TestChooseRandomIndex(t *testing.T) {
 	slice := []int{1, 2, 3, 4, 5}
-	t.Log(ChooseRandomIndex(slice))
+	t.Log(Random(slice))
 }
 
 func TestChooseRandomIndexes(t *testing.T) {
 	slice := []int{1, 2, 3, 4, 5}
-	t.Log(ChooseRandomIndexes(slice, 1))
-	t.Log(ChooseRandomIndexes(slice, 4))
-	t.Log(ChooseRandomIndexes(slice, 100))
-	t.Log(ChooseRandomIndexes(slice, 0))
+	t.Log(Randoms(slice, 1))
+	t.Log(Randoms(slice, 4))
+	t.Log(Randoms(slice, 100))
+	t.Log(Randoms(slice, 0))
 }
 
 func TestFilter(t *testing.T) {

@@ -15,6 +15,12 @@ func Cartesian[A, B, C any](sliceA []A, sliceB []B, multiplicationFunc func(a A,
 	return slice
 }
 
+// ContainsAll
+// ContainsAny
+// NotContains
+// NotContainsAll
+// NotContainsAny
+
 // pipe
 
 // Foreach

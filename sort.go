@@ -143,6 +143,10 @@ func IsSorted[T Ordered](slice []T) bool {
 	})
 }
 
+func IsSortedByFunc[T any, K Ordered](slice []T, orderedKeyFunc OrderedKeyFunc[T, K]) bool {
+	return IsSortedByKey(slice, orderedKeyFunc)
+}
+
 // IsReverseSorted 判断切片是否是倒序排序的
 func IsReverseSorted[T Ordered](slice []T) bool {
 	return IsReverseSortedByKey(slice, func(index int, item T) T {

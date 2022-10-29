@@ -38,8 +38,8 @@ func AppendCSVFile() {
 //	return nil
 //}
 
-// SaveAsJsonFile 把切片保存到JSON文件
-func SaveAsJsonFile[T any](slice []T, filepath string) error {
+// SaveAsJsonLineFile 把切片保存到JSON文件
+func SaveAsJsonLineFile[T any](slice []T, filepath string) error {
 	marshal, err := json.Marshal(slice)
 	if err != nil {
 		return err

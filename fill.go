@@ -2,8 +2,8 @@ package slice
 
 import "math/rand"
 
-// FillSliceValue 为切片中的所有下标赋值同一个值
-func FillSliceValue[T any](slice []T, value T) {
+// FillSameValue 为切片中的所有下标赋值同一个值
+func FillSameValue[T any](slice []T, value T) {
 	for index := range slice {
 		slice[index] = value
 	}

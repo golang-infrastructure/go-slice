@@ -12,7 +12,7 @@ func TestFillSliceRandomValue(t *testing.T) {
 
 func TestFillSliceValue(t *testing.T) {
 	slice := make([]int, 10)
-	FillSliceValue(slice, 1)
+	FillSameValue(slice, 1)
 	t.Log(slice)
 }
 
