@@ -24,10 +24,10 @@ func SubSlice[T any](slice []T, from, to int) []T {
 }
 
 // Filter 从切片中选择符合条件的元素
-func Filter[T any](slice []T, filterFunc func(item T) bool) []T {
+func Filter[T any](slice []T, filterFunc func(index int, item T) bool) []T {
 	newSlice := make([]T, 0)
-	for _, item := range slice {
-		if filterFunc(item) {
+	for index, item := range slice {
+		if filterFunc(index, item) {
 			newSlice = append(newSlice, item)
 		}
 	}

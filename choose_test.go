@@ -52,7 +52,7 @@ func TestChooseRandomIndexes(t *testing.T) {
 
 func TestFilter(t *testing.T) {
 	slice := []int{1, 2, 3, 4, 5}
-	t.Log(Filter(slice, func(item int) bool {
+	t.Log(Filter(slice, func(index int, item int) bool {
 		return item%2 == 0
 	}))
 }
