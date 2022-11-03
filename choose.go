@@ -6,9 +6,11 @@ package slice
 
 // SubSlice 子切片，不使用指针以防止引用释放不掉
 func SubSlice[T any](slice []T, from, to int) []T {
+	// 左下标不正确，自动修正
 	if from < 0 {
 		from = 0
 	}
+	// 右下标不正确，自动修正
 	if to > len(slice) {
 		to = len(slice)
 	}
@@ -52,7 +54,7 @@ func ChooseIndexOrDefault[T any](slice []T, index int, defaultValue T) T {
 
 // ChooseIndexes 返回给定的几个下标的元素，如果越界的话对应位置会填充为零值，会保证返回的切片的长度等于给的索引的数量
 func ChooseIndexes[T any](slice []T, indexes ...int) []T {
-	if len(indexes) == 0 {
+	if len(indexes) == 0 || len(slice) == 0 {
 		return nil
 	}
 	newSlice := make([]T, len(indexes), len(indexes))
@@ -96,6 +98,8 @@ func ChooseMiddleIndex[T any](slice []T) (T, T) {
 	}
 }
 
+// ------------------------------------------------- ------------------------------------------------------------------------
+
 // FirstItem 选择数组中的第一个元素
 func FirstItem[T any](slice []T) T {
 	var zero T
@@ -113,7 +117,7 @@ func FirstItemOrDefault[T any](slice []T, defaultValue T) T {
 
 // FirstItems 选择切片最前面几个元素
 func FirstItems[T any](slice []T, n int) []T {
-	if n <= 0 {
+	if n <= 0 || len(slice) == 0 {
 		return nil
 	}
 	// 避免越界，如果选多了的话就选到头就算完
@@ -122,6 +126,8 @@ func FirstItems[T any](slice []T, n int) []T {
 	}
 	return slice[0:n]
 }
+
+// ------------------------------------------------- ------------------------------------------------------------------------
 
 // LastItem 返回切片的最后一个元素，如果有的话
 func LastItem[T any](slice []T) T {
@@ -140,7 +146,7 @@ func LastItemOrDefault[T any](slice []T, defaultValue T) T {
 
 // LastItems 选择切片的最后几个元素，会保持其顺序
 func LastItems[T any](slice []T, n int) []T {
-	if n <= 0 {
+	if len(slice) == 0 || n <= 0 {
 		return nil
 	} else if n >= len(slice) {
 		return slice

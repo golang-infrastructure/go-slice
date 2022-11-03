@@ -1,5 +1,7 @@
 package slice
 
+import compare_anything "github.com/CC11001100/go-compare-anything"
+
 // 这个下面都是从切片中查找元素相关的
 
 // ------------------------------------------------ 无序切片 ---------------------------------------------------------------------
@@ -17,6 +19,15 @@ func NotContains[T comparable](slice []T, exceptedItem T) bool {
 func FindIndex[T comparable](slice []T, exceptedItem T) int {
 	for index, item := range slice {
 		if exceptedItem == item {
+			return index
+		}
+	}
+	return -1
+}
+
+func FindIndexByFunc[T any](slice []T, exceptedItem T, equalsFunc compare_anything.EqualsFunc[T]) int {
+	for index, item := range slice {
+		if equalsFunc(exceptedItem, item) {
 			return index
 		}
 	}
