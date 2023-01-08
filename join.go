@@ -1,6 +1,6 @@
 package slice
 
-import "github.com/CC11001100/go-tuple"
+import "github.com/golang-infrastructure/go-tuple"
 
 // ---------------------------------------------------------------------------------------------------------------------
 

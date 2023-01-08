@@ -2,7 +2,7 @@ package slice
 
 import (
 	"fmt"
-	compare_anything "github.com/CC11001100/go-compare-anything"
+	compare_anything "github.com/golang-infrastructure/go-compare-anything"
 	"strings"
 )
 

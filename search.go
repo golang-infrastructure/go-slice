@@ -1,6 +1,6 @@
 package slice
 
-import compare_anything "github.com/CC11001100/go-compare-anything"
+import compare_anything "github.com/golang-infrastructure/go-compare-anything"
 
 // 这个下面都是从切片中查找元素相关的
 

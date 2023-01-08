@@ -1,7 +1,7 @@
 package slice
 
 import (
-	"github.com/CC11001100/go-heap"
+	"github.com/golang-infrastructure/go-heap"
 	"sort"
 )
 

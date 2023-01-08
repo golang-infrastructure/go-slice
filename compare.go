@@ -1,8 +1,8 @@
 package slice
 
 import (
-	compare_anything "github.com/CC11001100/go-compare-anything"
-	"github.com/CC11001100/go-maths"
+	compare_anything "github.com/golang-infrastructure/go-compare-anything"
+	"github.com/golang-infrastructure/go-maths"
 )
 
 // ---------------------------------------------------------------------------------------------------------------------
