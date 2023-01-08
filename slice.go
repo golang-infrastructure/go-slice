@@ -7,18 +7,18 @@ func Clip[T any](slice []T) []T {
 	return slice[:len(slice):len(slice)]
 }
 
-// Grow TODO 增加slice的容量
-func Grow() {
+//// Grow TODO 增加slice的容量
+//func Grow() {
+//
+//}
 
-}
-
-func Shift() {
-
-}
-
-func UnShift() {
-
-}
+//func Shift() {
+//
+//}
+//
+//func UnShift() {
+//
+//}
 
 // ------------------------------------------------ ---------------------------------------------------------------------
 

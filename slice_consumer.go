@@ -22,7 +22,7 @@ func NewSliceConsumer[T any](slice []T) *SliceConsumer[T] {
 }
 
 func (x *SliceConsumer[T]) IsDone() bool {
-	return x.index < len(x.slice)
+	return x.index >= len(x.slice)
 }
 
 func (x *SliceConsumer[T]) Peek() T {

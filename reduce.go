@@ -9,10 +9,10 @@ import (
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-type ReduceFunc[T, R any] func(index int, item T, result R) R
+//type ReduceFunc[T, R any] func(index int, item T, result R) R
 
 // Reduce 把切片中的所有元素合并为一个
-func Reduce[T, R any](slice []T, initResult R, reduceFunc ReduceFunc[T, R]) R {
+func Reduce[T, R any](slice []T, initResult R, reduceFunc func(index int, item T, result R) R) R {
 	result := initResult
 	for index, item := range slice {
 		result = reduceFunc(index, item, result)
@@ -21,7 +21,7 @@ func Reduce[T, R any](slice []T, initResult R, reduceFunc ReduceFunc[T, R]) R {
 }
 
 // ReduceByKey 根据key把切片中的元素分组并合并返回
-func ReduceByKey[T any, K comparable, R any](slice []T, keyFunc func(index int, item T) K, reduceFunc ReduceFunc[T, R]) map[K]R {
+func ReduceByKey[T any, K comparable, R any](slice []T, keyFunc func(index int, item T) K, reduceFunc func(index int, item T, result R) R) map[K]R {
 	keyMap := make(map[K]R, 0)
 	for index, item := range slice {
 		key := keyFunc(index, item)

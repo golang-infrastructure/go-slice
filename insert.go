@@ -68,9 +68,9 @@ func InsertAfterLast[T any](slice []T, value T) []T {
 
 // ------------------------------------------------ ---------------------------------------------------------------------
 
-// InsertSlice 把sourceSlice切片插入到destinationSlice的指定位置，从那个位置开始的都往后移动
-func InsertSlice[T any](destinationSlice []T, sourceSlice []T, destinationStartIndex int) {
-	// TODO
-}
+//// InsertSlice 把sourceSlice切片插入到destinationSlice的指定位置，从那个位置开始的都往后移动
+//func InsertSlice[T any](destinationSlice []T, sourceSlice []T, destinationStartIndex int) {
+//	// TODO
+//}
 
 // ------------------------------------------------ ---------------------------------------------------------------------

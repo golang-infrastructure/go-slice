@@ -17,9 +17,9 @@ func SaveAsTextFile[T any](slice []T, filepath string) error {
 	return err
 }
 
-func AppendCSVFile() {
-
-}
+//func AppendCSVFile() {
+//
+//}
 
 //// SaveAsCSVFile 把矩阵保存为CSV文件
 //func SaveAsCSVFile[T any](slice []T, filepath string) error {
