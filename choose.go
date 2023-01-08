@@ -1,5 +1,7 @@
 package slice
 
+import "github.com/golang-infrastructure/go-maths"
+
 // 这个文件中的方法应该都是下标安全的
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -9,6 +11,10 @@ func SubSlice[T any](slice []T, from, to int) []T {
 	// 左下标不正确，自动修正
 	if from < 0 {
 		from = 0
+	}
+	// 右边的支持负数，如果是负数的话表示到倒数第几个
+	if to < 0 {
+		to = len(slice) - maths.Abs(to)
 	}
 	// 右下标不正确，自动修正
 	if to > len(slice) {
@@ -90,7 +96,7 @@ func ChooseEvenIndexes[T any](slice []T) []T {
 func ChooseMiddleIndex[T any](slice []T) (T, T) {
 	if len(slice)%2 == 0 {
 		// 偶数
-		return slice[len(slice)/2], slice[len(slice)/2-1]
+		return slice[len(slice)/2-1], slice[len(slice)/2]
 	} else {
 		// 奇数
 		var zero T
@@ -117,7 +123,9 @@ func FirstItemOrDefault[T any](slice []T, defaultValue T) T {
 
 // FirstItems 选择切片最前面几个元素
 func FirstItems[T any](slice []T, n int) []T {
-	if n <= 0 || len(slice) == 0 {
+	if n < 0 {
+		return LastItems(slice, maths.Abs(n))
+	} else if len(slice) == 0 || n == 0 {
 		return nil
 	}
 	// 避免越界，如果选多了的话就选到头就算完
@@ -146,8 +154,11 @@ func LastItemOrDefault[T any](slice []T, defaultValue T) T {
 
 // LastItems 选择切片的最后几个元素，会保持其顺序
 func LastItems[T any](slice []T, n int) []T {
-	if len(slice) == 0 || n <= 0 {
+	if len(slice) == 0 || n == 0 {
 		return nil
+	} else if n < 0 {
+		// 支持负数，如果传入的n是负数的话表示是从头部获取
+		return FirstItems(slice, maths.Abs(n))
 	} else if n >= len(slice) {
 		return slice
 	} else {
