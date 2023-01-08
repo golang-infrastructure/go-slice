@@ -2,6 +2,7 @@ package slice
 
 import (
 	compare_anything "github.com/golang-infrastructure/go-compare-anything"
+	"github.com/golang-infrastructure/go-gtypes"
 	"github.com/golang-infrastructure/go-maths"
 )
 
@@ -38,7 +39,7 @@ func EqualsByFunc[T any](sliceA, sliceB []T, equalsFunc compare_anything.EqualsF
 // ---------------------------------------------------------------------------------------------------------------------
 
 // Compare 比较两个切片的大小，需要切片中的元素时是Ordered的
-func Compare[T Ordered](sliceA, sliceB []T) int {
+func Compare[T gtypes.Ordered](sliceA, sliceB []T) int {
 	// 先按照都有的长度进行比较
 	endIndex := maths.Min(len(sliceA), len(sliceB))
 	for index := 0; index < endIndex; index++ {

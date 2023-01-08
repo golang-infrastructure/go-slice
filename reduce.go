@@ -3,6 +3,7 @@ package slice
 import (
 	"fmt"
 	compare_anything "github.com/golang-infrastructure/go-compare-anything"
+	"github.com/golang-infrastructure/go-gtypes"
 	"strings"
 )
 
@@ -33,7 +34,7 @@ func ReduceByKey[T any, K comparable, R any](slice []T, keyFunc KeyFunc[T, K], r
 // ---------------------------------------------------------------------------------------------------------------------
 
 // Max 求切片中的最大值
-func Max[T Ordered](slice []T) T {
+func Max[T gtypes.Ordered](slice []T) T {
 	if len(slice) == 0 {
 		var zero T
 		return zero
@@ -65,7 +66,7 @@ func MaxByComparator[T any](slice []T, comparator compare_anything.Comparator[T]
 // ---------------------------------------------------------------------------------------------------------------------
 
 // Min 求切片中的最小值
-func Min[T Ordered](slice []T) T {
+func Min[T gtypes.Ordered](slice []T) T {
 	if len(slice) == 0 {
 		var zero T
 		return zero
@@ -122,7 +123,7 @@ func MinByComparator[T any](slice []T, comparator compare_anything.Comparator[T]
 // ------------------------------------------------ ---------------------------------------------------------------------
 
 // Sum 注意，有溢出风险
-func Sum[T Integer | Float](slice []T) T {
+func Sum[T gtypes.Integer | gtypes.Float](slice []T) T {
 	var sum T
 	for _, item := range slice {
 		sum += item
@@ -131,7 +132,7 @@ func Sum[T Integer | Float](slice []T) T {
 }
 
 // SumByValueFunc 注意，有溢出风险
-func SumByValueFunc[T any, V Integer | Float](slice []T, valueFunc func(index int, item T) V) V {
+func SumByValueFunc[T any, V gtypes.Integer | gtypes.Float](slice []T, valueFunc func(index int, item T) V) V {
 	var sum V
 	for index, item := range slice {
 		sum += valueFunc(index, item)

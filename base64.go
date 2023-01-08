@@ -2,6 +2,8 @@ package slice
 
 import "encoding/base64"
 
+// ------------------------------------------------ ---------------------------------------------------------------------
+
 // Base64Encode 把字节数组编码为base64的字节数组
 func Base64Encode(byteSlice []byte) []byte {
 	if len(byteSlice) == 0 {
@@ -19,6 +21,8 @@ func Base64EncodeAsString(byteSlice []byte) string {
 	}
 	return string(Base64Encode(byteSlice))
 }
+
+// ------------------------------------------------ ---------------------------------------------------------------------
 
 // Base64Decode 把Base64编码的字节数组解析为字节数组，如果发生了错误则忽略错误并返回一个空字节数组
 func Base64Decode(byteSlice []byte) []byte {

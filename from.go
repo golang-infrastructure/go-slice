@@ -9,16 +9,12 @@ package slice
 
 // Of 从一个或多个元素创建切片，是FromItems的别名
 func Of[T any](items ...T) []T {
-	return FromItems(items...)
+	return items
 }
 
 // FromItems 从一个或多个元素创建切片
 func FromItems[T any](items ...T) []T {
-	slice := make([]T, len(items))
-	for index, item := range items {
-		slice[index] = item
-	}
-	return slice
+	return items
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

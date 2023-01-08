@@ -7,7 +7,7 @@ import (
 func TestUnion(t *testing.T) {
 
 	// empty
-	s1 := []string{}
+	var s1 []string
 	s2 := []string{"a", "b"}
 	s3 := Union(s1, s2)
 	t.Log(s3)

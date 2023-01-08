@@ -8,8 +8,8 @@ import (
 // ---------------------------------------------------------------------------------------------------------------------
 
 // To 类似Map，不同的是更推荐这个方法只用来做做类型转换
-func To[From, To any](slice []From, toFunc func(index int, item From) To) []To {
-	return Map[From, To](slice, toFunc)
+func To[From, To any](slice []From, itemMapFunc ItemMapFunc[From, To]) []To {
+	return Map[From, To](slice, itemMapFunc)
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -22,10 +22,10 @@ func ToStringSlice[T any](slice []T) []string {
 }
 
 // ToStringSliceByFunc 使用自定义的函数把切片转为string类型的切片
-func ToStringSliceByFunc[T any](slice []T, toStringFunc func(index int, item T) string) []string {
+func ToStringSliceByFunc[T any](slice []T, itemMapFunc ItemMapFunc[T, string]) []string {
 	stringSlice := make([]string, 0)
 	for index, item := range slice {
-		s := toStringFunc(index, item)
+		s := itemMapFunc(index, item)
 		stringSlice = append(stringSlice, s)
 	}
 	return stringSlice

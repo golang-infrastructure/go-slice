@@ -1,6 +1,9 @@
 package slice
 
-import "sort"
+import (
+	"github.com/golang-infrastructure/go-gtypes"
+	"sort"
+)
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -28,15 +31,23 @@ func GroupByKeyThenCount[T any, K comparable](keyFunc KeyFunc[T, K], slices ...[
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+// GroupByCountContext GroupByKeyThenOrderByCount的返回结果
 type GroupByCountContext[T any, K comparable] struct {
-	Key       K
-	Count     int
+
+	// 是哪个key
+	Key K
+
+	// 这个key分组中有多少个元素
+	Count int
+
+	// 这些元素都分别是谁
 	ItemSlice []T
 }
 
 // GroupByKeyThenOrderByCount 先分组，再根据每组的count排序
-func GroupByKeyThenOrderByCount[T any, K Ordered](keyFunc KeyFunc[T, K], slices ...[]T) []*GroupByCountContext[T, K] {
+func GroupByKeyThenOrderByCount[T any, K gtypes.Ordered](keyFunc KeyFunc[T, K], slices ...[]T) []*GroupByCountContext[T, K] {
 	keySliceMap := GroupByKey(keyFunc, slices...)
+	// 先收集到数组中
 	itemMetaSlice := make([]*GroupByCountContext[T, K], 0)
 	for key, itemSlice := range keySliceMap {
 		itemMetaSlice = append(itemMetaSlice, &GroupByCountContext[T, K]{
@@ -45,7 +56,7 @@ func GroupByKeyThenOrderByCount[T any, K Ordered](keyFunc KeyFunc[T, K], slices 
 			ItemSlice: itemSlice,
 		})
 	}
-	// 排序
+	// 然后对数组排序
 	sort.Slice(itemMetaSlice, func(i, j int) bool {
 		return itemMetaSlice[i].Key < itemMetaSlice[j].Key
 	})

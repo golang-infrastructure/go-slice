@@ -2,6 +2,7 @@ package slice
 
 import (
 	"errors"
+	"github.com/golang-infrastructure/go-gtypes"
 )
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -26,28 +27,28 @@ func FlatMap[T, V any](slice []T, flatFunc func(index int, item T) []V) []V {
 // ---------------------------------------------------------------------------------------------------------------------
 
 // AllAdd 切片中所有元素加上一个值
-func AllAdd[T Ordered](slice []T, n T) {
+func AllAdd[T gtypes.Ordered](slice []T, n T) {
 	for index, item := range slice {
 		slice[index] = item + n
 	}
 }
 
 // AllSub 切片中所有元素减去一个值
-func AllSub[T Integer | Float](slice []T, n T) {
+func AllSub[T gtypes.Integer | gtypes.Float](slice []T, n T) {
 	for index, item := range slice {
 		slice[index] = item - n
 	}
 }
 
 // AllMulti 切片中所有元素乘以一个值
-func AllMulti[T Integer | Float](slice []T, n T) {
+func AllMulti[T gtypes.Integer | gtypes.Float](slice []T, n T) {
 	for index, item := range slice {
 		slice[index] = item * n
 	}
 }
 
 // AllDivision 切片中所有元素除以一个值
-func AllDivision[T Integer | Float](slice []T, n T) error {
+func AllDivision[T gtypes.Integer | gtypes.Float](slice []T, n T) error {
 	if n == 0 {
 		return errors.New("can not division zero")
 	}

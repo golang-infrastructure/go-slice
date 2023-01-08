@@ -3,6 +3,10 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/golang-infrastructure/go-compare-anything v0.0.0-20221217111624-2e414c49d8dd h1:EtfJxm4Z6VxZOWVLbt3PUMbClAXov2cwjqAJJc/Hhcg=
 github.com/golang-infrastructure/go-compare-anything v0.0.0-20221217111624-2e414c49d8dd/go.mod h1:CtyKakUDiX9wgDm6OXrN9K9NnBa6GuwG880fexW9YMs=
+github.com/golang-infrastructure/go-compare-anything v0.0.1 h1:y5pGnHgp8gD5jqUmaEwv/zqgxYB0z5iJf/fJUg7Akpo=
+github.com/golang-infrastructure/go-compare-anything v0.0.1/go.mod h1:CtyKakUDiX9wgDm6OXrN9K9NnBa6GuwG880fexW9YMs=
+github.com/golang-infrastructure/go-compare-anything v0.0.2-0.20230108071748-35501d697475 h1:uzE5mG0WVAfjwRyZdO8ccVXIxC53JC+t+TthU8Vd4bs=
+github.com/golang-infrastructure/go-compare-anything v0.0.2-0.20230108071748-35501d697475/go.mod h1:CtyKakUDiX9wgDm6OXrN9K9NnBa6GuwG880fexW9YMs=
 github.com/golang-infrastructure/go-gtypes v0.0.1 h1:hnM1OYSwLPLGkZ4C6ecAxgmAUaPTjnhnUtRNmJj4p6c=
 github.com/golang-infrastructure/go-gtypes v0.0.1/go.mod h1:vFMCxFzxdMInvTtgLZRlWI1rS+mui88sMbL5I+zu1hg=
 github.com/golang-infrastructure/go-heap v0.0.2 h1:o3u5Wr8W/MO2PjtczBOEwb7HdUgK5zV12aAdp7T28IA=

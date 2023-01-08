@@ -11,5 +11,5 @@ func TestDistinct(t *testing.T) {
 
 func TestDistinctByUniqIDFunc(t *testing.T) {
 	slice := []int{1, 1, 2, 3, 4, 4, 7, 7, 10, 10}
-	t.Log(DistinctByUniqIDFunc(slice, func(item int) int { return item }))
+	t.Log(DistinctByUniqIDFunc(slice, func(index int, item int) int { return item }))
 }
