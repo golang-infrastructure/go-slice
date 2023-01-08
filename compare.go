@@ -9,13 +9,13 @@ import (
 // ---------------------------------------------------------------------------------------------------------------------
 
 // Equals 比较两个切片是否相等，需要切片中的元素是comparable的
-func Equals[T comparable](sliceA, sliceB []T) bool {
+func Equals[T any](sliceA, sliceB []T) bool {
 	if len(sliceA) != len(sliceB) {
 		return false
 	}
 	for index, itemA := range sliceA {
 		itemB := sliceB[index]
-		if itemA != itemB {
+		if !compare_anything.Equals(itemA, itemB) {
 			return false
 		}
 	}
