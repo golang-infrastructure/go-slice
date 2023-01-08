@@ -8,7 +8,7 @@ import (
 // ---------------------------------------------------------------------------------------------------------------------
 
 // GroupByKey 根据key进行分组，支持传入多个切片同时分组
-func GroupByKey[T any, K comparable](keyFunc KeyFunc[T, K], slices ...[]T) map[K][]T {
+func GroupByKey[T any, K comparable](keyFunc func(index int, item T) K, slices ...[]T) map[K][]T {
 	keySliceMap := make(map[K][]T, 0)
 	for _, slice := range slices {
 		for index, item := range slice {
@@ -20,7 +20,7 @@ func GroupByKey[T any, K comparable](keyFunc KeyFunc[T, K], slices ...[]T) map[K
 }
 
 // GroupByKeyThenCount 先分组，再求每一组的count
-func GroupByKeyThenCount[T any, K comparable](keyFunc KeyFunc[T, K], slices ...[]T) map[K]int {
+func GroupByKeyThenCount[T any, K comparable](keyFunc func(index int, item T) K, slices ...[]T) map[K]int {
 	keySliceMap := GroupByKey(keyFunc, slices...)
 	countMap := make(map[K]int, 0)
 	for key, keySlice := range keySliceMap {
@@ -45,7 +45,7 @@ type GroupByCountContext[T any, K comparable] struct {
 }
 
 // GroupByKeyThenOrderByCount 先分组，再根据每组的count排序
-func GroupByKeyThenOrderByCount[T any, K gtypes.Ordered](keyFunc KeyFunc[T, K], slices ...[]T) []*GroupByCountContext[T, K] {
+func GroupByKeyThenOrderByCount[T any, K gtypes.Ordered](keyFunc func(index int, item T) K, slices ...[]T) []*GroupByCountContext[T, K] {
 	keySliceMap := GroupByKey(keyFunc, slices...)
 	// 先收集到数组中
 	itemMetaSlice := make([]*GroupByCountContext[T, K], 0)

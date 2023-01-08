@@ -21,7 +21,7 @@ func Reduce[T, R any](slice []T, initResult R, reduceFunc ReduceFunc[T, R]) R {
 }
 
 // ReduceByKey 根据key把切片中的元素分组并合并返回
-func ReduceByKey[T any, K comparable, R any](slice []T, keyFunc KeyFunc[T, K], reduceFunc ReduceFunc[T, R]) map[K]R {
+func ReduceByKey[T any, K comparable, R any](slice []T, keyFunc func(index int, item T) K, reduceFunc ReduceFunc[T, R]) map[K]R {
 	keyMap := make(map[K]R, 0)
 	for index, item := range slice {
 		key := keyFunc(index, item)

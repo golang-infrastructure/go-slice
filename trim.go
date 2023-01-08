@@ -35,13 +35,13 @@ func TrimRight[T comparable](slice []T) []T {
 // ---------------------------------------------------------------------------------------------------------------------
 
 // TrimByFunc 从切片两侧trim，元素是否需要trim由自定义的trim函数决定
-func TrimByFunc[T any](slice []T, itemFilterFunc ItemFilterFunc[T]) []T {
+func TrimByFunc[T any](slice []T, itemFilterFunc func(index int, value T) bool) []T {
 	t := TrimLeftByFunc(slice, itemFilterFunc)
 	return TrimRightByFunc(t, itemFilterFunc)
 }
 
 // TrimLeftByFunc 从切片左边trim，根据自定义的函数来判定是否需要trim
-func TrimLeftByFunc[T any](slice []T, itemFilterFunc ItemFilterFunc[T]) []T {
+func TrimLeftByFunc[T any](slice []T, itemFilterFunc func(index int, value T) bool) []T {
 	if len(slice) == 0 {
 		return nil
 	}
@@ -60,7 +60,7 @@ func TrimLeftByFunc[T any](slice []T, itemFilterFunc ItemFilterFunc[T]) []T {
 }
 
 // TrimRightByFunc 从切片右边trim，根据自定义的函数来判定是否需要trim
-func TrimRightByFunc[T any](slice []T, trimFunc ItemFilterFunc[T]) []T {
+func TrimRightByFunc[T any](slice []T, trimFunc func(index int, value T) bool) []T {
 	if len(slice) == 0 {
 		return nil
 	}

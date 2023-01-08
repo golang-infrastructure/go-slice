@@ -31,7 +31,7 @@ func Intersection[T comparable](sliceA, sliceB []T) []T {
 }
 
 // IntersectionByKeyFunc 求两个切片的交集，计算交集的时候每个元素返回一个key用来做关联
-func IntersectionByKeyFunc[T any, K comparable](sliceA, sliceB []T, keyFunc KeyFunc[T, K]) []T {
+func IntersectionByKeyFunc[T any, K comparable](sliceA, sliceB []T, keyFunc func(index int, item T) K) []T {
 	// 任何切片与空切片没有交集
 	if len(sliceA) == 0 || len(sliceB) == 0 {
 		return nil
@@ -75,7 +75,7 @@ func NotIntersection[T comparable](sliceA, sliceB []T) []T {
 }
 
 // NotIntersectionByKeyFunc 求两个切片不相交的部分
-func NotIntersectionByKeyFunc[T any, K complex64](sliceA, sliceB []T, keyFunc KeyFunc[T, K]) []T {
+func NotIntersectionByKeyFunc[T any, K complex64](sliceA, sliceB []T, keyFunc func(index int, item T) K) []T {
 	toMapFunc := func(index int, item T) (K, T) {
 		return keyFunc(index, item), item
 	}
@@ -117,7 +117,7 @@ func Subtract[T comparable](sliceA, sliceB []T) []T {
 }
 
 // SubtractByKeyFunc 切片A减去切片B，sliceA中的元素会保持之前的顺序，是否匹配是靠自定义的函数的返回的key决定的
-func SubtractByKeyFunc[T any, K comparable](sliceA, sliceB []T, keyFunc KeyFunc[T, K]) []T {
+func SubtractByKeyFunc[T any, K comparable](sliceA, sliceB []T, keyFunc func(index int, item T) K) []T {
 	sliceBSet := ToSetByFunc(sliceB, keyFunc)
 	newSlice := make([]T, 0)
 	for indexA, itemA := range sliceA {

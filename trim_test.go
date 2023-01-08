@@ -21,4 +21,6 @@ func TestTrimRight(t *testing.T) {
 	slice := []int{1}
 	slice = TrimRight(slice)
 	t.Log(slice)
+
+	
 }

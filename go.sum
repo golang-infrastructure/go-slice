@@ -15,6 +15,8 @@ github.com/golang-infrastructure/go-maths v0.0.0-20221215154759-5800c4c8f84e h1:
 github.com/golang-infrastructure/go-maths v0.0.0-20221215154759-5800c4c8f84e/go.mod h1:66VNYnuOFws0n4+Wat/SJM92b7KC7tcD6BmGEB5prBI=
 github.com/golang-infrastructure/go-reflect-utils v0.0.0-20221130143747-965ef2eb09c3 h1:jJ7AdpNdLQudsx1hiXY9iwmauHARV4/UB52KnBh9Se0=
 github.com/golang-infrastructure/go-reflect-utils v0.0.0-20221130143747-965ef2eb09c3/go.mod h1:zqXYxqOBa1mL2ilBK6PuH/Wb/Iego7en6XhiKWdZQHI=
+github.com/golang-infrastructure/go-shuffle v0.0.0-20221209150116-28fd05dbba09 h1:VDib384AwaMVQIakDkNuHdx+AF1PVrlsSha0O6yiaoo=
+github.com/golang-infrastructure/go-shuffle v0.0.0-20221209150116-28fd05dbba09/go.mod h1:GClvLXsnSroM9pINK2GcMrSmP8RHtFHT8NAqsVHEhA0=
 github.com/golang-infrastructure/go-tuple v0.0.0-20221215155811-4ed54fe7d579 h1:pQV2/ichhyLoR3aJSNXByuxtdPM2y229Rq5x9DGl5OU=
 github.com/golang-infrastructure/go-tuple v0.0.0-20221215155811-4ed54fe7d579/go.mod h1:cn8fHK0Sjxh7nSrnNpRa9wi1wIsmBLsjOip4LTjQz+Q=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=

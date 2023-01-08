@@ -8,7 +8,7 @@ import (
 // ---------------------------------------------------------------------------------------------------------------------
 
 // To 类似Map，不同的是更推荐这个方法只用来做做类型转换
-func To[From, To any](slice []From, itemMapFunc ItemMapFunc[From, To]) []To {
+func To[From, To any](slice []From, itemMapFunc func(index int, value From) To) []To {
 	return Map[From, To](slice, itemMapFunc)
 }
 
@@ -22,7 +22,7 @@ func ToStringSlice[T any](slice []T) []string {
 }
 
 // ToStringSliceByFunc 使用自定义的函数把切片转为string类型的切片
-func ToStringSliceByFunc[T any](slice []T, itemMapFunc ItemMapFunc[T, string]) []string {
+func ToStringSliceByFunc[T any](slice []T, itemMapFunc func(index int, value T) string) []string {
 	stringSlice := make([]string, 0)
 	for index, item := range slice {
 		s := itemMapFunc(index, item)
@@ -73,7 +73,7 @@ func ToSet[T comparable](slice []T) map[T]struct{} {
 }
 
 // ToSetByFunc 把切片转为set，根据自定义的函数从切片的元素生成set的key
-func ToSetByFunc[T any, K comparable](slice []T, keyFunc KeyFunc[T, K]) map[K]struct{} {
+func ToSetByFunc[T any, K comparable](slice []T, keyFunc func(index int, item T) K) map[K]struct{} {
 	set := make(map[K]struct{}, 0)
 	for index, item := range slice {
 		key := keyFunc(index, item)

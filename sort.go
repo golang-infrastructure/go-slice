@@ -16,7 +16,7 @@ func Sort[T gtypes.Ordered](slice []T) {
 }
 
 // SortByKey 如果切片中的元素本身不是可排序的，但是可以从元素生成一个key，则可以根据key对切片排序
-func SortByKey[T any, K gtypes.Ordered](slice []T, keyFunc OrderedKeyFunc[T, K]) {
+func SortByKey[T any, K gtypes.Ordered](slice []T, keyFunc func(index int, item T) K) {
 	sort.Slice(slice, func(i, j int) bool {
 		a := slice[i]
 		b := slice[j]
@@ -61,7 +61,7 @@ func MergeSortedSlices[T gtypes.Ordered](slice ...[]T) []T {
 }
 
 // MergeSortedSlicesByKey 根据key合并多个有序切片，需要多个切片本身就是已经根据key排好序的
-func MergeSortedSlicesByKey[T any, K gtypes.Ordered](keyFunc OrderedKeyFunc[T, K], slices ...[]T) []T {
+func MergeSortedSlicesByKey[T any, K gtypes.Ordered](keyFunc func(index int, item T) K, slices ...[]T) []T {
 
 	consumerSlice := make([]*SliceConsumer[T], 0)
 	for _, slice := range slices {
@@ -104,7 +104,7 @@ func UnionAndSort[T gtypes.Ordered](slice ...[]T) []T {
 }
 
 // UnionAndSortByKey 多个无序切片合并并排序
-func UnionAndSortByKey[T any, K gtypes.Ordered](keyFunc OrderedKeyFunc[T, K], slices ...[]T) []T {
+func UnionAndSortByKey[T any, K gtypes.Ordered](keyFunc func(index int, item T) K, slices ...[]T) []T {
 
 	// 创建一个堆，用来根据key排序
 	heap := heap.New(func(a T, b T) int {
@@ -144,7 +144,7 @@ func IsSorted[T gtypes.Ordered](slice []T) bool {
 	})
 }
 
-func IsSortedByFunc[T any, K gtypes.Ordered](slice []T, orderedKeyFunc OrderedKeyFunc[T, K]) bool {
+func IsSortedByFunc[T any, K gtypes.Ordered](slice []T, orderedKeyFunc func(index int, item T) K) bool {
 	return IsSortedByKey(slice, orderedKeyFunc)
 }
 
@@ -158,7 +158,7 @@ func IsReverseSorted[T gtypes.Ordered](slice []T) bool {
 // ---------------------------------------------------------------------------------------------------------------------
 
 // IsReverseSortedByKey 判断切片是否是已经倒序排好序的
-func IsReverseSortedByKey[T any, K gtypes.Ordered](slice []T, keyFunc OrderedKeyFunc[T, K]) bool {
+func IsReverseSortedByKey[T any, K gtypes.Ordered](slice []T, keyFunc func(index int, item T) K) bool {
 	for i := 0; i < len(slice)-1; i++ {
 		keyA := keyFunc(i, slice[i])
 		keyB := keyFunc(i+1, slice[i+1])
@@ -170,7 +170,7 @@ func IsReverseSortedByKey[T any, K gtypes.Ordered](slice []T, keyFunc OrderedKey
 }
 
 // IsSortedByKey 判断切片是否是已经排好序的
-func IsSortedByKey[T any, K gtypes.Ordered](slice []T, keyFunc OrderedKeyFunc[T, K]) bool {
+func IsSortedByKey[T any, K gtypes.Ordered](slice []T, keyFunc func(index int, item T) K) bool {
 	for i := 0; i < len(slice)-1; i++ {
 		keyA := keyFunc(i, slice[i])
 		keyB := keyFunc(i+1, slice[i+1])

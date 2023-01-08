@@ -5,7 +5,7 @@ import "github.com/golang-infrastructure/go-tuple"
 // ---------------------------------------------------------------------------------------------------------------------
 
 // JoinByKeyFunc 两个切片join，两个都有的才会被join返回，注意如果数据有重复会笛卡尔积，与数据库的join行为保持一致
-func JoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA KeyFunc[A, K], sliceB []B, keyFuncB KeyFunc[B, K]) map[K][]*tuple.Tuple2[A, B] {
+func JoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA func(index int, item A) K, sliceB []B, keyFuncB func(index int, item B) K) map[K][]*tuple.Tuple2[A, B] {
 	// 先把A做成一个关联点，因为可能会存在多个相同key的元素，要都能够保留着
 	sliceAMap := make(map[K][]A, 0)
 	for indexA, itemA := range sliceA {
@@ -25,7 +25,7 @@ func JoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA KeyFunc[A, K], s
 }
 
 // LeftJoinByKeyFunc 左边全来
-func LeftJoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA KeyFunc[A, K], sliceB []B, keyFuncB KeyFunc[B, K]) map[K][]*tuple.Tuple2[A, B] {
+func LeftJoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA func(index int, item A) K, sliceB []B, keyFuncB func(index int, item B) K) map[K][]*tuple.Tuple2[A, B] {
 
 	// 除了保留切片A的元素，还要把下表也保留着，等下要把被join成功的下标都收集得到
 	sliceAMap := make(map[K][]*tuple.Tuple2[A, int], 0)
@@ -59,7 +59,7 @@ func LeftJoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA KeyFunc[A, K
 }
 
 // RightJoinByKeyFunc 右边全来
-func RightJoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA KeyFunc[A, K], sliceB []B, keyFuncB KeyFunc[B, K]) map[K][]*tuple.Tuple2[A, B] {
+func RightJoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA func(index int, item A) K, sliceB []B, keyFuncB func(index int, item B) K) map[K][]*tuple.Tuple2[A, B] {
 	// 除了保留切片A的元素，还要把下表也保留着，等下要把被join成功的下标都收集得到
 	sliceBMap := make(map[K][]*tuple.Tuple2[B, int], 0)
 	for indexB, itemB := range sliceB {
@@ -92,7 +92,7 @@ func RightJoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA KeyFunc[A, 
 }
 
 // FullJoinByKeyFunc 两边全来
-func FullJoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA KeyFunc[A, K], sliceB []B, keyFuncB KeyFunc[B, K]) map[K][]*tuple.Tuple2[A, B] {
+func FullJoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA func(index int, item A) K, sliceB []B, keyFuncB func(index int, item B) K) map[K][]*tuple.Tuple2[A, B] {
 
 	// 除了保留切片A的元素，还要把下表也保留着，等下要把被join成功的下标都收集得到
 	sliceAMap := make(map[K][]*tuple.Tuple2[A, int], 0)
@@ -140,7 +140,7 @@ func FullJoinByKeyFunc[A, B any, K comparable](sliceA []A, keyFuncA KeyFunc[A, K
 // ---------------------------------------------------------------------------------------------------------------------
 
 // CoGroup 将多个切片中的元素以key做关联，相同的key会被放到同一个key下的切片中
-func CoGroup[A, B any, K comparable](sliceA []A, keyFuncA KeyFunc[A, K], sliceB []B, keyFuncB KeyFunc[B, K]) map[K]*tuple.Tuple2[[]A, []B] {
+func CoGroup[A, B any, K comparable](sliceA []A, keyFuncA func(index int, item A) K, sliceB []B, keyFuncB func(index int, item B) K) map[K]*tuple.Tuple2[[]A, []B] {
 	resultMap := make(map[K]*tuple.Tuple2[[]A, []B], 0)
 
 	// 切片A
@@ -171,7 +171,7 @@ func CoGroup[A, B any, K comparable](sliceA []A, keyFuncA KeyFunc[A, K], sliceB 
 // ---------------------------------------------------------------------------------------------------------------------
 
 // FoldByKeyFunc 根据key折叠合并切片中的元素，注意折叠完元素在数组中的相对位置可能会被改变，不是稳定的折叠
-func FoldByKeyFunc[T any, K comparable](slice []T, keyFunc KeyFunc[T, K], mergeFunc func(source T, destination T) T) []T {
+func FoldByKeyFunc[T any, K comparable](slice []T, keyFunc func(index int, item T) K, mergeFunc func(source T, destination T) T) []T {
 	keyMap := make(map[K]T, 0)
 	for index, item := range slice {
 		key := keyFunc(index, item)

@@ -1,19 +1,13 @@
 package slice
 
-import "math/rand"
+import (
+	"github.com/golang-infrastructure/go-shuffle"
+	"math/rand"
+)
 
-// Shuffle 对切片中的元素洗牌
-func Shuffle[T any](slice []T) []T {
-	//indexSet := make(map[int]struct{}, 0)
-	//for index := range slice {
-	//	indexSet[index] = struct{}{}
-	//}
-	//left := 0
-	//right :=
-	//for {
-	//	// TODO 2022-10-27 01:23:29
-	//}
-	return nil
+// Shuffle 对切片中的元素洗牌打算顺序
+func Shuffle[T any](slice []T) {
+	shuffle.FisherYatesKnuthShuffle[T](slice)
 }
 
 // Random 从切片中随机选择一个元素
@@ -26,6 +20,8 @@ func Random[T any](slice []T) T {
 }
 
 // Randoms 从切片中随机选择n个元素，会避免重复选择
+// slice: 从这个切片中选择元素
+// n: 要选择的元素的个数
 func Randoms[T any](slice []T, n int) []T {
 	if n == 0 || len(slice) == 0 {
 		return nil
