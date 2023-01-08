@@ -75,7 +75,7 @@ func NotIntersection[T comparable](sliceA, sliceB []T) []T {
 }
 
 // NotIntersectionByKeyFunc 求两个切片不相交的部分
-func NotIntersectionByKeyFunc[T any, K complex64](sliceA, sliceB []T, keyFunc func(index int, item T) K) []T {
+func NotIntersectionByKeyFunc[T any, K comparable](sliceA, sliceB []T, keyFunc func(index int, item T) K) []T {
 	toMapFunc := func(index int, item T) (K, T) {
 		return keyFunc(index, item), item
 	}
